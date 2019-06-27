@@ -59,10 +59,17 @@
 
 <script>
 
-
   document.addEventListener("keydown", (event) => {
-    console.log(event.currentTarget);
-    event.keyCode.classList.add("playing");
+    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    key.classList.add("playing");
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play();
+    key.addEventListener("transitionend", (event) => {
+      event.currentTarget.classList.remove("playing");
+    })
+    console.log("kikou lenina");
     })
 
 </script>
